@@ -2,11 +2,15 @@ package ksendr;
 
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
+import org.telegram.telegrambots.meta.api.objects.ChatPhoto;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,7 +68,14 @@ public class Bot extends TelegramLongPollingBot {
             return "Выберите пункт меню";
         }
         if (msg.equals("Фоточки Цирюхи")) {
-            return "Пока в разработке";
+            SendPhoto sendPhoto = new SendPhoto().setPhoto(new File("D:\\1.jpg"));
+            sendPhoto.setChatId(chat_id);
+            try {
+               execute(sendPhoto);
+            } catch (TelegramApiException e) {
+                e.printStackTrace();
+            }//return "Пока в разработке";
+
         }
         if (msg.equals("Обо мне")) {
             return "Я Костриж, я Бомжук";
@@ -85,7 +96,7 @@ public class Bot extends TelegramLongPollingBot {
         }
 
         if (msg.equals("Как записаться")) {
-            return "@ksenika_7";
+            return "t.me/ksenika_7";
         }
         return "Если возникли проблемы, воспользуйтесь /start";
 
