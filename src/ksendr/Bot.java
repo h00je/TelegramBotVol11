@@ -29,6 +29,7 @@ public class Bot extends TelegramLongPollingBot {
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
+
     }
 
 
@@ -49,7 +50,7 @@ public class Bot extends TelegramLongPollingBot {
         replyKeyboardMarkup.setResizeKeyboard(true);
         replyKeyboardMarkup.setOneTimeKeyboard(true);
 
-        if (msg.equals("Привет") || msg.equals("Меню") || msg.equals("/start")) {
+        if (msg.equals("Привет") || msg.equals("Меню") || msg.equals("/start") || msg.equals("Вернуться назад")) {
             keyboard.clear(); // чиста клавиатуры
             keyboardFirstRow.add("Обо мне"); // кнопки первого ряда
             keyboardFirstRow.add("Работы");
@@ -72,8 +73,17 @@ public class Bot extends TelegramLongPollingBot {
             return "Я правда делаю красивые реснички";
         }
         if (msg.equals("Полезная информация")) {
-            return " "; // Можно просто ссылкой на ресурс
+            keyboard.clear(); // чиста клавиатуры
+            keyboardFirstRow.add("Длительность процедур"); // кнопки первого ряда
+            keyboardFirstRow.add("Разница в видах наращивания");
+            keyboardSecondRow.add("Как ухаживать за ресничками");
+            keyboardSecondRow.add("Вернуться назад");// кнопки второго ряда
+            keyboard.add(keyboardFirstRow); //Добавление рядов
+            keyboard.add(keyboardSecondRow);
+            replyKeyboardMarkup.setKeyboard(keyboard); // Обвновление клавиатуры
+            return "Выберите пункт меню";
         }
+
         if (msg.equals("Как записаться")) {
             return "@ksenika_7";
         }
